@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 import urllib.parse
 import xbmcplugin
@@ -7,23 +8,23 @@ import requests
 
 addon = xbmcaddon.Addon()
 handle = int(sys.argv[1])
-TMDB_API_KEY = '78e5fd786504cce2f45126a53c490c2a'  # החלף במפתח שלך
+TMDB_API_KEY = '78e5fd786504cce2f45126a53c490c2a'
 
 def build_url(query):
     return sys.argv[0] + '?' + urllib.parse.urlencode(query)
 
 def list_main_menu():
-    xbmcplugin.setPluginCategory(handle, 'צפייה ישירה')
-    xbmcplugin.addDirectoryItem(handle, build_url({'action': 'search'}), xbmcgui.ListItem('🔍 חפש סרט/סדרה'), True)
-    xbmcplugin.addDirectoryItem(handle, build_url({'action': 'custom_links'}), xbmcgui.ListItem('📺 ערוצים חיים ישראליים'), True)
+    xbmcplugin.setPluginCategory(handle, 'Main Menu')
+    xbmcplugin.addDirectoryItem(handle, build_url({'action': 'search'}), xbmcgui.ListItem('🔍 Search for Movies/TV Shows'), True)
+    xbmcplugin.addDirectoryItem(handle, build_url({'action': 'custom_links'}), xbmcgui.ListItem('📺 Live Channels and Direct Links'), True)
     xbmcplugin.endOfDirectory(handle)
 
 def search_tmdb():
-    keyboard = xbmcgui.Dialog().input('הכנס שם סרט או סדרה:', type=xbmcgui.INPUT_ALPHANUM)
+    keyboard = xbmcgui.Dialog().input('Enter movie or TV show name:', type=xbmcgui.INPUT_ALPHANUM)
     if not keyboard:
         return
 
-    url = f'https://api.themoviedb.org/3/search/multi?api_key={TMDB_API_KEY}&query={urllib.parse.quote(keyboard)}&language=he-IL'
+    url = f'https://api.themoviedb.org/3/search/multi?api_key={TMDB_API_KEY}&query={urllib.parse.quote(keyboard)}&language=en-US'
     data = requests.get(url).json()
 
     for item in data.get('results', []):
@@ -67,27 +68,27 @@ def play_direct(params):
 def list_custom_links():
     channels = [
         {
-            'name': 'כאן חינוכית',
+            'name': 'Kan Kids',
             'url': 'https://kan23.media.kan.org.il/hls/live/2024691/2024691/source1_2.5k/chunklist.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/e/e5/Kan_educational_2018.svg/200px-Kan_educational_2018.svg.png'
         },
         {
-            'name': 'כאן 11',
+            'name': 'Kan 11',
             'url': 'https://kan11.media.kan.org.il/hls/live/2024514/2024514/master.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/5/5b/Kan11_logo_2023.svg/200px-Kan11_logo_2023.svg.png'
         },
         {
-            'name': 'ערוץ 12 (קשת)',
+            'name': 'Channel 12',
             'url': 'http://stremioaddon.vercel.app/mako',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/0/07/Keshet_12_logo_2017.svg/200px-Keshet_12_logo_2017.svg.png'
         },
         {
-            'name': 'ערוץ 13 (רשת)',
+            'name': 'Channel 13',
             'url': 'https://reshet.g-mana.live/media/4607e158-e4d4-4e18-9160-3dc3ea9bc677/mainManifest.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/e/e2/Reshet13_logo.svg/200px-Reshet13_logo.svg.png'
         },
         {
-            'name': 'ערוץ 14',
+            'name': 'Channel 14',
             'url': 'https://ch14-channel14-content.akamaized.net/hls/live/2104807/CH14_CHANNEL14/master.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/c/c3/Channel14_2021_logo.svg/200px-Channel14_2021_logo.svg.png'
         },
@@ -97,37 +98,37 @@ def list_custom_links():
             'logo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/I24news_logo.svg/200px-I24news_logo.svg.png'
         },
         {
-            'name': 'ערוץ 24 / האח הגדול',
+            'name': 'Channel 24 / Big Brother',
             'url': 'https://mako-streaming.akamaized.net/direct/hls/live/2035340/ch24live/video_7201280_p_1.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/3/36/Music_24_logo_2020.svg/200px-Music_24_logo_2020.svg.png'
         },
         {
-            'name': 'כאן 33 (מכאן)',
+            'name': 'Kan 33',
             'url': 'http://makan.media.kan.org.il/hls/live/2024680/2024680/master.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/3/39/Kan_33_logo.svg/200px-Kan_33_logo.svg.png'
         },
         {
-            'name': 'וואלה TV',
+            'name': 'Walla TV',
             'url': 'https://amg01742-walla-wallanews-ono-btlna.amagi.tv/playlist/amg01742-walla-wallanews-ono/playlist.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Walla%21_logo.svg/200px-Walla%21_logo.svg.png'
         },
         {
-            'name': 'ערוץ הידברות',
+            'name': 'Hidabroot Channel',
             'url': 'https://cdn.cybercdn.live/HidabrootIL/Live97/playlist.m3u8',
             'logo': 'https://www.hidabroot.org/img/logo.svg'
         },
         {
-            'name': 'ערוץ קבלה',
+            'name': 'Kabbalah Channel',
             'url': 'https://edge3.uk.kab.tv/live/tv66-heb-high/playlist.m3u8',
             'logo': 'https://kabbalahmedia.info/img/logo.png'
         },
         {
-            'name': 'ערוץ מוסאיוף',
+            'name': 'Musayof Channel',
             'url': 'http://wowza.media-line.co.il/Musayof-Live/livestream.sdp/playlist.m3u8',
             'logo': 'https://www.bhol.co.il/ImageGen.ashx?image=/images/archive/110x/1143300.jpg'
         },
         {
-            'name': 'ספורט 5 רדיו',
+            'name': 'Sport 5 (Audio)',
             'url': 'https://rgelive.akamaized.net/hls/live/2043151/radiolive/playlist.m3u8',
             'logo': 'https://upload.wikimedia.org/wikipedia/he/thumb/9/90/Sport5_logo.svg/200px-Sport5_logo.svg.png'
         }
