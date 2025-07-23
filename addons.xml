@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <addon id="plugin.video.directwatch"
        name="IDTV"
        version="1.0.0"
@@ -9,13 +10,13 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="he">תוסף לצפייה ישירה ממקורות חיצוניים</summary>
-    <description lang="he">תוסף לצפייה בסרטים, סדרות וקישורים ישירים דרך Kodi</description>
-    <language>he</language>
+    <summary lang="en">Addon for direct streaming from external sources</summary>
+    <description lang="en">Watch movies, TV shows and direct links via Kodi</description>
+    <language>en</language>
     <platform>all</platform>
     <assets>
       <icon>icon.png</icon>
-      <fanart>fanart.jpg</fanart> <!-- לא חובה -->
+      <fanart>fanart.jpg</fanart>
     </assets>
   </extension>
 </addon>
