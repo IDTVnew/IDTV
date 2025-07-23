@@ -1,0 +1,21 @@
+<addon id="plugin.video.directwatch"
+       name="IDTV"
+       version="1.0.0"
+       provider-name="IDTV dev">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="he">תוסף לצפייה ישירה ממקורות חיצוניים</summary>
+    <description lang="he">תוסף לצפייה בסרטים, סדרות וקישורים ישירים דרך Kodi</description>
+    <language>he</language>
+    <platform>all</platform>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart> <!-- לא חובה -->
+    </assets>
+  </extension>
+</addon>
